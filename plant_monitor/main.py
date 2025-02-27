@@ -4,16 +4,19 @@
 
 from micropyserver import MicroPyServer
 
-server = MicroPyServer(host="0.0.0.0", port=8079)
+server = MicroPyServer(host="0.0.0.0", port=8000)
 content =''
 indexFile = 'index.html'
 
 def index(request):
-    print('---> Received Request')
-    response = 'HTTP/1.0 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\n'
+    print('<--- Received Request')
+    contentLength = len(content.encode())
+    response = f'HTTP/1.0 200 OK\r\nContent-Type: text/html; Content-Length: {contentLength}; Connection: close; charset=UTF-8\r\n'
     response += "\r\n"
     response += content
     server.send(response)
+    print('---> Response Sent')
+
 
 def stop(request):
     server.stop()
