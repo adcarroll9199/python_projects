@@ -11,7 +11,7 @@ indexFile = 'index.html'
 def index(request):
     print('<--- Received Request')
     contentLength = len(content.encode())
-    response = f'HTTP/1.0 200 OK\r\nContent-Type: text/html; Content-Length: {contentLength}; Connection: close; charset=UTF-8\r\n'
+    response = f'HTTP/1.0 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length: {contentLength}\r\nConnection: close\r\n'
     response += "\r\n"
     response += content
     server.send(response)
